@@ -1,0 +1,7 @@
+{
+    "python.linting.pylintEnabled": true,
+    "files.associations": {
+        "*.js": "html"
+    },
+    "emmet.triggerExpansionOnTab": true
+}
