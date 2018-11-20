@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <title>Login</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>Autotest</title>
+    <style>
+        body {
+            text-align: center
+        }
+    </style>
 </head>
+
 <body>
-<h1>login</h1>    
-
-<form method="post" action="/login/">
-{% csrf_token %}
-<br> <input name="username" type="text" placeholder="username">
-<br> <input name="password" type="password" placeholder="password">
-{{error}} <br>
-<br> <button id="submit" type="submit">submit</button>
-
-
-</form>
+    <div>
+        <font size="1">
+            <h1>自动化测试平台</h1>
+        </font>
+        <form action="/login/" method="post">
+            {% csrf_token %}
+            <br>&nbsp;&nbsp;用户名：<input type="text" name="username" placeholder="test">
+            <br><br> &nbsp;&nbsp;密 &nbsp;&nbsp;码：<input type="password" name="password" placeholder="test123" >
+            <br>{{error}}<br>  
+            &nbsp;<button style="width:240px;height:28px;" id="submit" type="submit">登陆</button>      
+        </form>
+    </div>
 </body>
+
 </html>
