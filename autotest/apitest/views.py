@@ -4,6 +4,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.contrib.auth import authenticate,login
+from apitest.models import Apitest,Apistep
 
 # Create your views here.
 # def test(request):
@@ -24,8 +25,21 @@ def Login(request):
             return render(request,'login.html',{'error':"username or password error"})    
     return render(request,"login.html")      
 
+# @login_required
+def apitest_manage(request):
+    username = request.session.get('user','')
+    apitest_list = Apitest.objects.all()
+    return render(request,"apitest_manage.html",{"user":username,"apitests":apitest_list})
+
+# @login_required
+def apistep_manage(request):
+    username = request.session.get('user','')
+    apistep_list = Apistep.objects.all()
+    return render(request,"apistep_manage.html",{"user":username,"apisteps":apistep_list})
+
 def home(request):
     return render(request,"home.html")
+
 
 def logout(request):
     return render(request,"login.html")  
