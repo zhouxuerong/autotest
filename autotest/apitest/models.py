@@ -32,4 +32,20 @@ class Apistep(models.Model):
     def __str__(self):
         return self.apiname
 
+class Apis(models.Model):
+    Product = models.ForeignKey('product.Product',on_delete=models.CASCADE,null=True) #关联产品ID        
+    apiname = models.CharField("接口名称",max_length=100) #接口标题
+    apiurl = models.CharField("url地址",max_length=200)  #地址
+    apiparamvalue = models.CharField("请求参数和值",max_length=800) #请求参数和值
+    REQUEST_METHOD = (('get','get'),('post','post'),('put','put'),('delete','getdelete'),('patch','patch'))
+    apimethod = models.CharField(verbose_name="请求方法",choices = REQUEST_METHOD,default='get',max_length=200,null=True) #请求方法
+    apiresult = models.CharField("预期结果",max_length=200) #预期结果
+    apistatus = models.BooleanField("是否通过") #是否通过
+    create_time = models.DateTimeField("创建时间",auto_now=True)
+    class Meta:
+        verbose_name = '单一场景接口'
+        verbose_name_plural = '单一场景接口'   
+    def __str__(self):
+        return self.apiname
+
 

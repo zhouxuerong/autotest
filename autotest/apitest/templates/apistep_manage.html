@@ -1,20 +1,88 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-<link rel="stylesheet" href="style.css">
-<title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <title>自动化测试平台</title>
 </head>
-<body>
+
+<body role="document">
+    <!--navbar-expand-md 无该属性,collapse不显示-->
+    <nav class="navbar navbar-expand-md  navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">自动化测试平台</a>
+            </div>
+            <!-- collapse折叠   -->
+            <div id="collapsibleNavbar" class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="active">
+                        <a href="/apitest_manage/">流程接口测试</a>
+                    </li>
+                    <li>
+                        <a href="#">流程接口测试步骤</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">{{user}}</a></li>
+                    <li><a href="/logout/">退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--流程接口-->
+    <div class="row" style="padding-top:20px;padding-left:20px">
+        <div class="cod-md-11">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>所属产品</th>
+                        <th>所属用例</th>
+                        <th>步骤</th>
+                        <th>URL地址</th>
+                        <th>参数=值</th>
+                        <th>方法</th>
+                        <th>预期结果</th>
+                        <th>测试结果</th>
+                        <th>执行时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for apistep in apisteps %}
+                    <tr>
+                        <td>{{apistep.Apitest.Product.productname}}</td>
+                        <td>case{{apistep.Apitest.id}}:{{apistep.Apitest.apitestname}}</td>
+                        <td>{{apistep.apistep}}:{{apistep.apiname}}</td>
+                        <td>{{apistep.apiurl}}</td>
+                        <td>{{apistep.apiparamvalue}}</td>
+                        <td>{{apistep.api_method}}</td>
+                        <td>{{apistep.apiresult}}</td>
+                        <td>{% if apistep.apistatus == 1 %} 
+                            <a style='color:green'>{{apistep.apistatus}}</a>
+                            {% else %}
+                            <a style="color:red">{{apistep.apistatus}}</a>
+                            {% endif %}
+                        </td>
+                        <td>{{apistep.create_time}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
 </body>
+
 </html>
