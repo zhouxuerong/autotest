@@ -24,6 +24,7 @@ SECRET_KEY = '5!$c7d!_gr4^zw)au1adpacddhk&$+jqn&qb61z8zn^bu=$bfa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -39,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apitest',
     'product',
+    'bug',
+    'set',
+    'apptest',
 ]
 
 MIDDLEWARE = [

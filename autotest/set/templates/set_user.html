@@ -1,0 +1,66 @@
+<html lang="zh-CN">
+
+<head>
+    <!--支持移动设备-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <title>产品自动化测试平台</title>
+</head>
+
+<body role="document">
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-sm bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">&nbsp;</a>
+            <ul class="nav justify-content-center"></ul>
+            <ul class="nav justify-content-end">
+                <li class="nav-link"><a style='color:white' href="#">{{user}}</a></li>
+                <li class="nav-link"><a style='color:white' href="/logout">退出</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!--用户管理-->
+    <div class="row" style="padding-top:20px;">
+        <div class="col-md-11">
+            <!--table table-striped 有条纹的表格-->
+            <table class="table table-striped" style="table-layout: fixed;">
+                <style>
+                    <!--   -->
+                    td{white-space: nowrap;overflow: hidden;text-overflow: ellipsis}
+                </style>
+                <thead>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>用户名</th>
+                        <!-- <th>密码</th> -->
+                        <th>邮箱</th>
+                        <th>最近登录日期</th>
+                        <th>注册日期</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <!-- <td>{{ user.password }}</td> -->
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.last_login }}</td>
+                        <td>{{ user.date_joined }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -13,7 +13,7 @@
 
 <body role="document">
     <!--navbar-expand-md 无该属性,collapse不显示-->
-    <nav class="navbar navbar-expand-md  navbar-fixed-top">
+    <nav class="navbar navbar-expand-md navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">自动化测试平台</a>
@@ -21,14 +21,14 @@
             <!-- collapse折叠   -->
             <div id="collapsibleNavbar" class="collapse navbar-collapse">
                 <ul class="navbar-nav">
-                    <li class="active">
-                        <a href="#">流程接口测试</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">流程接口测试</a>
                     </li>
-                    <li>
-                        <a href="/apistep_manage/">流程接口测试步骤</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/apistep_manage/">流程接口测试步骤</a>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-left">
                     <li><a href="#">{{user}}</a></li>
                     <li><a href="/logout/">退出</a></li>
                 </ul>
@@ -36,7 +36,7 @@
         </div>
     </nav>
     <!--流程接口-->
-    <div class="row" style="padding-top:20px;padding-left:20px">
+    <div class="row" style="padding-top:20px;padding-left:30px">
         <div class="cod-md-11">
             <table class="table table-striped">
                 <thead>
