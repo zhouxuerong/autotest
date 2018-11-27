@@ -23,7 +23,7 @@
         </div>
     </nav>
 
-    <!--app流程测试步骤-->
+    <!--web流程测试步骤-->
     <div class="row" style="padding-top:20px;">
         <div class="col-md-11">
             <table class="table table-striped">
@@ -44,24 +44,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for appcasestep in appcasesteps %}
+                    {% for webcasestep in webcasesteps %}
                     <tr>
-                        <td>{{ appcasestep.Appcase.Product.productname }}</td>
+                        <td>{{ webcasestep.Appcase.Product.productname }}</td>
                         <!--  case  -->
-                        <td>case{{ appcasestep.Appcase.id }}:{{ appcasestep.Appcase.appcasename }}</td>
-                        <td>{{ appcasestep.appteststep }}:{{ appcasestep.apptestobjname }}</td>
-                        <td>{{ appcasestep.appfindmethod }}</td>
-                        <td>{{ appcasestep.appevelement }}</td>
-                        <td>{{ appcasestep.appoptmethod }}</td>
-                        <td>{{ appcasestep.apptestdata }}</td>
-                        <td>{{ appcasestep.appassertdata }}</td>
-                        <td>{% if appcasestep.apptestresult == 1 %}
-                            <a style='color:green'>{{appcasestep.apptestresult}}</a>
+                        <td>case{{ webcasestep.Appcase.id }}:{{ webcasestep.Appcase.webcasename }}</td>
+                        <td>{{ webcasestep.webteststep }}:{{ webcasestep.webtestobjname }}</td>
+                        <td>{{ webcasestep.webfindmethod }}</td>
+                        <td>{{ webcasestep.webevelement }}</td>
+                        <td>{{ webcasestep.weboptmethod }}</td>
+                        <td>{{ webcasestep.webtestdata }}</td>
+                        <td>{{ webcasestep.webassertdata }}</td>
+                        <td>{% if webcasestep.webtestresult == 1 %}
+                            <a style='color:green'>{{webcasestep.webtestresult}}</a>
                             {% else %}
-                            <a style='color:red'>{{appcasestep.apptestresult}}</a>
+                            <a style='color:red'>{{webcasestep.webtestresult}}</a>
                             {% endif %}
                         </td>
-                        <td>{{ appcasestep.create_time }}</td>
+                        <td>{{ webcasestep.create_time }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
