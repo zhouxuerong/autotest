@@ -10,7 +10,14 @@ class mySqlOperation:
         aa = self.cursor.execute(sql)
         info = self.cursor.fetchmany(aa)
         return info
-        
+
+    def sqlexecute(self,sql,param):
+        self.cursor.execute(sql,param)
+        self.coon.commit()
+        self.cursor.close()
+        self.coon.close()
+
+
     def closeCon(self):
         self.coon.commit()
         self.cursor.close()
