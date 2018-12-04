@@ -10,5 +10,10 @@ def appcase_manage(request):
 def appcasestep_manage(request):
     appcasestep_list = Appcasestep.objects.all()
     username = request.session.get("user","")
-    return render(request,"appcasestep_manage.html",{"user":username,"appcasesteps":appcasestep_list})    
+    return render(request,"appcasestep_manage.html",{"user":username,"appcasesteps":appcasestep_list})  
+
+def apptest_report(request):
+    username = request.session.get("user","")
+    return render(request,"apptest_report.html")
+
     

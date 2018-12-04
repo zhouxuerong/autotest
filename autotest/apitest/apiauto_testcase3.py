@@ -66,7 +66,7 @@ def interfaceTest(case_list):
             return "测试用例格式不正确%s"%e  
 
         if param == "":
-            new_url = "http://"+"api.test.com.cn"+url
+            new_url = "http://" + "api.test.com.cn" + url
         elif param == "null":
             new_url = "http://"+url
         else:
@@ -249,6 +249,8 @@ if __name__ == '__main__':
     testunit.addTest(ApiFlow("test_readSQLcase"))
     filename =os.path.split(os.path.realpath(__file__))[0] + "/templates/apitest_report.html"
     fp = open(filename,"wb")
+    runner  = HTMLTestRunner.HTMLTestRunner(stream=fp,title=u"自动化测试汇总报告",description=u"app自动化测试")
+    runner.run(testunit)
 
 
         

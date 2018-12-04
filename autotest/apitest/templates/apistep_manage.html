@@ -13,37 +13,30 @@
 
 <body role="document">
     <!--navbar-expand-md 无该属性,collapse不显示-->
-    <nav class="navbar navbar-expand-md  navbar-fixed-top">
+    <nav class="navbar navbar-expand-sm bg-dark nvarbar-dark fixed-top">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">自动化测试平台</a>
-            </div>
+                <a class="navbar-brand" href="#" style="color:white">自动化测试平台</a>
             <!-- collapse折叠   -->
-            <div id="collapsibleNavbar" class="collapse navbar-collapse">
-                <ul class="navbar-nav">
-                    <li class="active">
-                        <a href="/apitest_manage/">流程接口测试</a>
-                    </li>
-                    <li>
-                        <a href="#">流程接口测试步骤</a>
-                    </li>
+                <ul class="nav justify-content-center">
+                    <a class="nav-link" style="color:white" href="/apitest_manage/">流程接口测试</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="nav-link" style="color:white" href="#">流程接口测试步骤</a>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">{{user}}</a></li>
-                    <li><a href="/logout/">退出</a></li>
+                <ul class="nav justify-content-end">
+                    <li><a href="#" style="color:white">{{user}}&nbsp;&nbsp;</a></li>
+                    <li><a href="/logout/" style="color:white">退出</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <!--流程接口-->
-    <div class="row" style="padding-top:20px;padding-left:20px">
-        <div class="cod-md-11">
+    <!--流程接口测试步骤-->
+    <div class="row" style="padding-top:70px;padding-left:30px">
+        <div class="col-md-11">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>所属产品</th>
-                        <th>所属用例</th>
-                        <th>步骤</th>
+                        <th>ID</th>
+                        <th>接口名称</th>
                         <th>URL地址</th>
                         <th>参数=值</th>
                         <th>方法</th>
@@ -56,9 +49,8 @@
 
                     {% for apistep in apisteps %}
                     <tr>
-                        <td>{{apistep.Apitest.Product.productname}}</td>
-                        <td>case{{apistep.Apitest.id}}:{{apistep.Apitest.apitestname}}</td>
-                        <td>{{apistep.apistep}}:{{apistep.apiname}}</td>
+                        <td>{{apistep.id}}</td>
+                        <td>{{apistep.apiname}}</td>
                         <td>{{apistep.apiurl}}</td>
                         <td>{{apistep.apiparamvalue}}</td>
                         <td>{{apistep.api_method}}</td>

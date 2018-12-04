@@ -28,6 +28,7 @@ urlpatterns = [
     path('login/',views.Login),
     path('home/',views.home),
     path('logout/',views.logout),
+    path('left/',views.left),
     path('product_manage/',proviews.product_manage),
     path('apistep_manage/',views.apistep_manage),
     path('apitest_manage/',views.apitest_manage),   
@@ -39,4 +40,5 @@ urlpatterns = [
     path("webcase_manage/",webtestviews.webcase_manage),
     path("webcasestep_manage/",webtestviews.webcasestep_manage),
     path("test_report/",views.test_report),
+    path("apptest_report/",apptestviews.apptest_report),
 ]

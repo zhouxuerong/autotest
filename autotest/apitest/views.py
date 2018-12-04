@@ -41,6 +41,9 @@ def apistep_manage(request):
 def home(request):
     return render(request,"home.html")
 
+def left(request):
+    return render(request,"left.html")
+
 
 def logout(request):
     return render(request,"login.html")  
