@@ -14,22 +14,70 @@
 <body role="document">
     <!--navbar-expand-md 无该属性,collapse不显示-->
     <nav class="navbar navbar-expand-sm bg-dark nvarbar-dark fixed-top">
-        <div class="container-fluid">
-                <a class="navbar-brand" href="#" style="color:white">自动化测试平台</a>
+        <div class="container">
+                <a class="navbar-brand" href="#" style="color:white">&nbsp;</a>
             <!-- collapse折叠   -->
                 <ul class="nav justify-content-center">
                     <a class="nav-link" style="color:white" href="/apitest_manage/">流程接口测试</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a class="nav-link" style="color:white" href="#">流程接口测试步骤</a>
+                    <a class="nav-link"  style="color:white" href="/apistep_manage/">流程接口测试步骤</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="nav-link"  style="color:white" href="/apis_manage/">单一接口测试用例</a>       
                 </ul>
                 <ul class="nav justify-content-end">
-                    <li><a href="#" style="color:white">{{user}}&nbsp;&nbsp;</a></li>
-                    <li><a href="/logout/" style="color:white">退出</a></li>
+                    <li class="nav-link"><a style="color:white" href="../admin">{{user}}</a></li>
+                    <li class="nav-link"><a style="color:white" href="/logout/">退出</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <!--流程接口测试步骤-->
+    <div class="page-header" style="padding-top:70px;">
+        <form method="GET" class="navbar-form" action="/apistepsearch/">
+        {% csrf_token %}
+        <input type="search" name="apistepname" placeholder="名称" required>
+        <button type="submit">搜索</button>
+        </form>
+    </div>
+    <span style="position:absolute;right:50%;bottom:30px;">
+            <div style="position:absolute; right:100px;width:100px;">
+                    <tr>
+                        <th>共</th>
+                        <td>{{apistepcounts}}</td>
+                        <th>条记录</th>
+                    </tr>            
+                </div>
+            <div class="container">
+                <ul class="pagination" id="pager">
+                    {#上一页按钮开始#}
+                    {# 如果当前页有上一页#}
+                    {% if apisteps.has_previous %}
+                        {#  当前页的上一页按钮正常使用#}
+                        <li class="previous"><a href="/apistep_manage/?page={{ apiss.previous_page_number }}">上一页</a></li>
+                    {% else %}
+                        {# 当前页的不存在上一页时,上一页的按钮不可用#}
+                        <li class="previous disabled"><a href="#">上一页</a></li>
+                    {% endif %}
+                    {#上一页按钮结束#}
+                    {# 页码开始#}
+                    {% for num in apisteps.paginator.page_range %}
+                        {% if num == currentPage %}
+                            <li class="item active"><a href="apistep_manage/?page={{ num }}">{{ num }}</a></li>
+                        {% else %}
+                            <li class="item"><a href="/apistep_manage/?page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {#页码结束#}
+                    {# 下一页按钮开始#}
+                    {% if apisstep.has_next %}
+                        <li class="next"><a href="/apistep_manage/?page={{ apiss.next_page_number }}">下一页</a></li>
+                    {% else %}
+                        <li class="next disabled"><a href="#">下一页</a></li>
+                    {% endif %}
+                    {# 下一页按钮结束#}
+                </ul>
+            </div>
+            </span>
     <div class="row" style="padding-top:70px;padding-left:30px">
         <div class="col-md-11">
             <table class="table table-striped">

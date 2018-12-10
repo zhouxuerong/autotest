@@ -15,15 +15,64 @@
     <nav class="navbar navbar-expand-sm bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">&nbsp;</a>
-            <ul class="nav justify-content-center"></ul>
+            <ul class="nav justify-content-center">
+                <a class="nav-link" style="color:white" href="/webcase_manage/">web测试用例</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="nav-link"  style="color:white" href="/webteststep_manage/">web测试用例步骤</a>    
+            </ul>
             <ul class="nav justify-content-end">
-                <li class="nav-link"><a style='color:white' href="#">{{user}}</a></li>
+                <li class="nav-link"><a style='color:white' href="../admin">{{user}}</a></li>
                 <li class="nav-link"><a style='color:white' href="/logout">退出</a></li>
             </ul>
         </div>
     </nav>
 
     <!--web流程测试步骤-->
+    <div class="page-header" style="padding-top:70px;">
+        <form method="GET" class="navbar-form" action="/websearch/">
+        {% csrf_token %}
+        <input type="search" name="webcasename" placeholder="名称" required>
+        <button type="submit">搜索</button>
+        </form>
+    </div>
+    <span style="position:absolute;right:50%;bottom:30px;">
+        <div style="position:absolute; right:100px;width:100px;">
+            <tr>
+                <th>共</th>
+                <td>{{webcasestepcounts}}</td>
+                <th>条记录</th>
+            </tr>            
+        </div>            <div class="container">
+                <ul class="pagination" id="pager">
+                    {#上一页按钮开始#}
+                    {# 如果当前页有上一页#}
+                    {% if webcasesteps.has_previous %}
+                        {#  当前页的上一页按钮正常使用#}
+                        <li class="previous"><a href="/webcasestep_manage/?page={{ webcasesteps.previous_page_number }}">上一页</a></li>
+                    {% else %}
+                        {# 当前页的不存在上一页时,上一页的按钮不可用#}
+                        <li class="previous disabled"><a href="#">上一页</a></li>
+                    {% endif %}
+                    {#上一页按钮结束#}
+                    {# 页码开始#}
+                    {% for num in webcasesteps.paginator.page_range %}
+                        {% if num == currentPage %}
+                            <li class="item active"><a href="/webcasestep_manage/?page={{ num }}">{{ num }}</a></li>
+                        {% else %}
+                            <li class="item"><a href="/webcasestep_manage/?page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {#页码结束#}
+                    {# 下一页按钮开始#}
+                    {% if webcasesteps.has_next %}
+                        <li class="next"><a href="/webcasestep_manage/?page={{ webcasesteps.next_page_number }}">下一页</a></li>
+                    {% else %}
+                        <li class="next disabled"><a href="#">下一页</a></li>
+                    {% endif %}
+                    {# 下一页按钮结束#}
+                </ul>
+            </div>
+            </span>
     <div class="row" style="padding-top:20px;">
         <div class="col-md-11">
             <table class="table table-striped">
@@ -46,7 +95,7 @@
                 <tbody>
                     {% for webcasestep in webcasesteps %}
                     <tr>
-                        <td>{{ webcasestep.Appcase.Product.productname }}</td>
+                        <td>{{ webcasestep.Webcase.Product.productname }}</td>
                         <!--  case  -->
                         <td>case{{ webcasestep.Appcase.id }}:{{ webcasestep.Appcase.webcasename }}</td>
                         <td>{{ webcasestep.webteststep }}:{{ webcasestep.webtestobjname }}</td>

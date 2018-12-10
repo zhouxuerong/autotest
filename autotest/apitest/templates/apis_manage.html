@@ -12,105 +12,115 @@
 </head>
 
 <body role="document">
-    <!--导航栏-->
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <!--navbar-expand-md 无该属性,collapse不显示-->
+    <nav class="navbar navbar-expand-sm bg-dark nvarbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">&nbsp;</a>
+                <a class="navbar-brand" href="#" style="color:white">&nbsp;</a>
+            <!-- collapse折叠   -->
                 <ul class="nav justify-content-center">
                     <a class="nav-link" style="color:white" href="/apitest_manage/">流程接口测试</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a class="nav-link"  style="color:white" href="/apistep_manage/">流程接口测试步骤</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a class="nav-link"  style="color:white" href="/apistep_manage/">单一接口测试用例</a>
+                    <a class="nav-link"  style="color:white" href="/apis_manage/">单一接口测试用例</a>
                 </ul>
                 <ul class="nav justify-content-end">
-                    <li class="nav-link"><a style="color:white" href="../admin">{{user}}</a></li>
-                    <li class="nav-link"><a style="color:white" href="/logout/">退出</a></li>
+                    <li class="nav-link"><a style="color:white">{{user}}</a></li>
+                    <li class="nav-link"><a style="color:white">退出</a></li>
                 </ul>
             </div>
+        </div>
     </nav>
-    <!--流程接口-->
+    <!--流程接口测试步骤-->
     <div class="page-header" style="padding-top:70px;">
-    <form class="navbar-form" method="get" action="/apistepearch">
-    <!-- {% csrf_token %} -->
-    <input type="search" name="apitestname" placeholder="名称" required>
-    <button type="submit">搜索</button>
-    </form>
-    </div>
-    <span style="position:absolute;right:50%;bottom:30px;">
-            <div style="position:absolute; right:100px;width:100px;">
-                    <tr>
-                        <th>共</th>
-                        <td>{{apitestcounts}}</td>
-                        <th>条记录</th>
-                    </tr>            
-                </div>
+        <form method="GET" class="navbar-form" action="/apissearch/">
+        {% csrf_token %}
+        <input type="search" name="apisname" placeholder="名称" required>
+        <button type="submit">搜索</button>
+        </form>
+    </div> 
+    <span style="position:absolute; right:50%;bottom:30px;">
+        <div style="position:absolute; right:100px;width:100px;">
+            <tr>
+                <th>共</th>
+                <td>{{apiscounts}}</td>
+                <th>条记录</th>
+            </tr>            
+        </div>
             <div class="container">
                 <ul class="pagination" id="pager">
                     {#上一页按钮开始#}
                     {# 如果当前页有上一页#}
-                    {% if apitests.has_previous %}
+                    {% if apiss.has_previous %}
                         {#  当前页的上一页按钮正常使用#}
-                        <li class="previous"><a href="/apitest_manage/?page={{ apisteps.previous_page_number }}">上一页</a></li>
+                        <li class="previous"><a href="/apis_manage/?page={{ apiss.previous_page_number }}">上一页</a></li>
                     {% else %}
                         {# 当前页的不存在上一页时,上一页的按钮不可用#}
                         <li class="previous disabled"><a href="#">上一页</a></li>
                     {% endif %}
                     {#上一页按钮结束#}
                     {# 页码开始#}
-                    {% for num in apitests.paginator.page_range %}
+                    {% for num in apiss.paginator.page_range %}
                         {% if num == currentPage %}
-                            <li class="item active"><a href="/apitest_manage/?page={{ num }}">{{ num }}</a></li>
+                            <li class="item active"><a href="/apis_manage/?page={{ num }}">{{ num }}</a></li>
                         {% else %}
-                            <li class="item"><a href="/apitest_manage/?page={{ num }}">{{ num }}</a></li>
+                            <li class="item"><a href="/apis_manage/?page={{ num }}">{{ num }}</a></li>
                         {% endif %}
                     {% endfor %}
                     {#页码结束#}
                     {# 下一页按钮开始#}
-                    {% if apisteps.has_next %}
-                        <li class="next"><a href="/apitest_manage/?page={{ apisteps.next_page_number }}">下一页</a></li>
+                    {% if apiss.has_next %}
+                        <li class="next"><a href="/apis_manage/?page={{ apiss.next_page_number }}">下一页</a></li>
                     {% else %}
                         <li class="next disabled"><a href="#">下一页</a></li>
                     {% endif %}
                     {# 下一页按钮结束#}
                 </ul>
             </div>
-            </span>
+        </span>
     <div class="row" style="padding-top:70px;padding-left:30px">
         <div class="col-md-11">
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>业务接口流程名称</th>
-                        <th>执行人</th>
-                        <th>结果</th>
+                        <th>产品</th>
+                        <th>单一接口测试用例名称</th>
+                        <th>URL地址</th>
+                        <th>参数=值</th>
+                        <th>方法</th>
+                        <th>预期结果</th>
+                        <th>测试结果</th>
+                        <th>执行时间</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for apitest in apitests %}
+
+                    {% for apis in apiss %}
                     <tr>
-                        <td>{{apitest.id}}</td>
-                        <td>{{apitest.apitestname}}</td>
-                        <td>{{apitest.apitester}}</td>
-                        <td>    
-                        {% if apitest.apitestresult == 1 %}
-                            <a style="color:green"> {{apitest.apitestresult}} </a>
-                        {% else %}
-                            <a style="color:red">{{apitest.apitestresult}}</a>
-                        {% endif %}       
+                        <td>{{apis.id}}</td>
+                        <td>{{apis.Product.productname}}</td>
+                        <td>{{apis.apiname}}</td>
+                        <td>{{apis.apiurl}}</td>
+                        <td>{{apis.apiparamvalue}}</td>
+                        <td>{{apis.apimethod}}</td>
+                        <td>{{apis.apiresult}}</td>
+                        <td>{% if apis.apistatus == 1 %} 
+                            <a style='color:green'>{{apis.apistatus}}</a>
+                            {% else %}
+                            <a style="color:red">{{apis.apistatus}}</a>
+                            {% endif %}
                         </td>
+                        <td>{{apis.create_time}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
+
             </table>
 
         </div>
 
     </div>
-
-
-
 
 </body>
 

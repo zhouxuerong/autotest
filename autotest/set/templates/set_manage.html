@@ -22,8 +22,47 @@
             </ul>
         </div>
     </nav>
+    <span style="position:absolute;right:100px;bottom:30px;">
+            <div class="container">
+                <ul class="pagination" id="pager">
+                    {#上一页按钮开始#}
+                    {# 如果当前页有上一页#}
+                    {% if sets.has_previous %}
+                        {#  当前页的上一页按钮正常使用#}
+                        <li class="previous"><a href="/set_manage/?page={{ sets.previous_page_number }}">上一页</a></li>
+                    {% else %}
+                        {# 当前页的不存在上一页时,上一页的按钮不可用#}
+                        <li class="previous disabled"><a href="#">上一页</a></li>
+                    {% endif %}
+                    {#上一页按钮结束#}
+                    {# 页码开始#}
+                    {% for num in sets.paginator.page_range %}
+                        {% if num == currentPage %}
+                            <li class="item active"><a href="/set_manage/?page={{ num }}">{{ num }}</a></li>
+                        {% else %}
+                            <li class="item"><a href="/set_manage/?page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {#页码结束#}
+                    {# 下一页按钮开始#}
+                    {% if sets.has_next %}
+                        <li class="next"><a href="/set_manage/?page={{ sets.next_page_number }}">下一页</a></li>
+                    {% else %}
+                        <li class="next disabled"><a href="#">下一页</a></li>
+                    {% endif %}
+                    {# 下一页按钮结束#}
+                </ul>
+            </div>
+            </span>
 
     <!--产品列表-->
+    <div class="page-header" style="padding-top:70px;">
+    <form method="GET" class="navbar-form" action="/setsearch/">
+    {% csrf_token %}
+    <input type="search" name="setname" placeholder="名称" required>
+    <button type="submit">搜索</button>
+    </form>
+    </div>
     <div class="row" style="padding-top:20px;">
         <div class="col-md-11">
             <!--table table-striped 有条纹的表格-->

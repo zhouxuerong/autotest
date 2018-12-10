@@ -2,10 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from django.contrib import auth
 from django.contrib.auth import authenticate,login
 from apitest.models import Apitest,Apistep,Apis
 import pymysql
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 
 # Create your views here.
 # def test(request):
@@ -30,13 +30,78 @@ def Login(request):
 def apitest_manage(request):
     username = request.session.get('user','')
     apitest_list = Apitest.objects.all()
-    return render(request,"apitest_manage.html",{"user":username,"apitests":apitest_list})
+    apitest_counts = Apitest.objects.all().count()
+    paginator = Paginator(apitest_list, 10)
+    #从前端获取当前的页码数,默认为1
+    page = request.GET.get('page',1)   
+    #把当前的页码数转换成整数类型
+    currentPage=int(page)
+    try:
+        print(page)
+        apitest_list = paginator.page(page)#获取当前页码的记录
+    except PageNotAnInteger:
+        apitest_list = paginator.page(1)#如果用户输入的页码不是整数时,显示第1页的内容
+    except EmptyPage:
+        apitest_list = paginator.page(paginator.num_pages)#如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
+ 
+    return render(request,"apitest_manage.html",{"user":username,"apitests":apitest_list,"apitestcounts":apitest_counts})
 
 # @login_required
 def apistep_manage(request):
     username = request.session.get('user','')
     apistep_list = Apistep.objects.all()
-    return render(request,"apistep_manage.html",{"user":username,"apisteps":apistep_list})
+    apistep_counts = Apistep.objects.all().count()
+    paginator = Paginator(apistep_list, 10)
+    #从前端获取当前的页码数,默认为1
+    page = request.GET.get('page',1)   
+    #把当前的页码数转换成整数类型
+    currentPage=int(page)
+    try:
+        print(page)
+        apistep_list = paginator.page(page)#获取当前页码的记录
+    except PageNotAnInteger:
+        apistep_list = paginator.page(1)#如果用户输入的页码不是整数时,显示第1页的内容
+    except EmptyPage:
+        apistep_list = paginator.page(paginator.num_pages)#如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
+ 
+    return render(request,"apistep_manage.html",{"user":username,"apisteps":apistep_list,"apistepcounts":apistep_counts})
+
+def apis_manage(request):
+    username = request.session.get("user","")
+    apis_list = Apis.objects.all()
+    apis_counts = Apis.objects.all().count()
+    paginator = Paginator(apis_list, 10)
+    #从前端获取当前的页码数,默认为1
+    page = request.GET.get('page',1)   
+    #把当前的页码数转换成整数类型
+    currentPage=int(page)
+    try:
+        print(page)
+        apis_list = paginator.page(page)#获取当前页码的记录
+    except PageNotAnInteger:
+        apis_list = paginator.page(1)#如果用户输入的页码不是整数时,显示第1页的内容
+    except EmptyPage:
+        apis_list = paginator.page(paginator.num_pages)#如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
+    return render(request,"apis_manage.html",{"user":username,"apiss":apis_list,"apiscounts":apis_counts})
+
+# @login_required
+def apisearch(request):
+    username = request.session.get("user","")
+    search_apitestname = request.GET.get("apitestname","")
+    apitest_list=Apitest.objects.filter(apitestname__icontains=search_apitestname)
+    return render(request,"apitest_manage.html",{"user":username,"apitests":apitest_list})
+
+def apissearch(request):
+    username = request.session.get("user","")
+    search_apisname = request.GET.get("apisname","")
+    apis_list=Apis.objects.filter(apiname__icontains=search_apisname)
+    return render(request,"apitest_manage.html",{"user":username,"apiss":apis_list})
+
+def apistepsearch(request):
+    username = request.session.get("user","")
+    search_apistepname = request.GET.get("apistepname","")
+    apistep_list=Apistep.objects.filter(apiname__icontains=search_apistepname)
+    return render(request,"apitest_manage.html",{"user":username,"apisteps":apistep_list})
 
 def home(request):
     return render(request,"home.html")

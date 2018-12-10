@@ -2,7 +2,7 @@
 
 <head>
     <!--支持移动设备-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charbug="utf-8">
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
@@ -22,15 +22,59 @@
             </ul>
         </div>
     </nav>
+    
 
     <!--产品列表-->
+    <div class="page-header" style="padding-top:70px;">
+        <form method="GET" class="navbar-form" action="/bugsearch/">
+        {% csrf_token %}
+        <input type="search" name="bugname" placeholder="名称" required>
+        <button type="submit">搜索</button>
+        </form>
+    </div> 
+    <span style="position:absolute;right:50%;bottom:30px;">
+            <div style="position:absolute; right:100px;width:100px;">
+                <tr>
+                    <th>共</th>
+                    <td>{{bugcounts}}</td>
+                    <th>条记录</th>
+                </tr>            
+            </div>
+            <div class="container">
+                <ul class="pagination" id="pager">
+                    {#上一页按钮开始#}
+                    {# 如果当前页有上一页#}
+                    {% if bugs.has_previous %}
+                        {#  当前页的上一页按钮正常使用#}
+                        <li class="previous"><a href="/bug_manage/?page={{ bugs.previous_page_number }}">上一页</a></li>
+                    {% else %}
+                        {# 当前页的不存在上一页时,上一页的按钮不可用#}
+                        <li class="previous disabled"><a href="#">上一页</a></li>
+                    {% endif %}
+                    {#上一页按钮结束#}
+                    {# 页码开始#}
+                    {% for num in bugs.paginator.page_range %}
+                        {% if num == currentPage %}
+                            <li class="item active"><a href="/bug_manage/?page={{ num }}">{{ num }}</a></li>
+                        {% else %}
+                            <li class="item"><a href="/bug_manage/?page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {#页码结束#}
+                    {# 下一页按钮开始#}
+                    {% if bugs.has_next %}
+                        <li class="next"><a href="/bug_manage/?page={{ bugs.next_page_number }}">下一页</a></li>
+                    {% else %}
+                        <li class="next disabled"><a href="#">下一页</a></li>
+                    {% endif %}
+                    {# 下一页按钮结束#}
+                </ul>
+            </div>
+            </span>
     <div class="row" style="padding-top:20px;">
         <div class="col-md-11">
             <table class="table table-striped">
                 <thead>
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
                     <tr>
                         <th>ID</th>
                         <th>产品</th>
