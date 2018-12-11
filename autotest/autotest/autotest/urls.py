@@ -29,6 +29,7 @@ urlpatterns = [
     path('home/',views.home),
     path('logout/',views.logout),
     path('left/',views.left),
+    path('welcome',views.welcome),
     path('product_manage/',proviews.product_manage),
     path('productsearch/',proviews.productsearch),
     path('apistep_manage/',views.apistep_manage),

@@ -3,7 +3,9 @@ from apitest.models import Apistep,Apitest,Apis
 from product.models import Product
 
 # Register your models here.
-
+# 把默认的站点管理员和标题改为autotestplat
+admin.site.site_title="AutotestPlat"
+admin.site.site_header="AutotestPlat"
 class ApistepAdmin(admin.TabularInline):
     list_display = ('apiname','apiurl','apistep','apiparamvalue','api_method','apiresult','apistatus','create_time','id','apitest')  
     '''还有一种比较特殊的情况，父子表的情况。编辑父表之后，再打开子表编辑，而且子表只能一条一条编辑，比较麻烦。

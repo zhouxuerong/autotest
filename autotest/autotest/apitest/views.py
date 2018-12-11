@@ -106,6 +106,9 @@ def apistepsearch(request):
 def home(request):
     return render(request,"home.html")
 
+def welcome(request):
+    return render(request,"welcome.html")
+
 def left(request):
     return render(request,"left.html")
 

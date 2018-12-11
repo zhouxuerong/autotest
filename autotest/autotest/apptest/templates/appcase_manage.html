@@ -33,6 +33,19 @@
         {% csrf_token %}
         <input type="search" name="appcasename" placeholder="名称" required>
         <button type="submit">搜索</button>
+        <div style="float:right;width:73%;">
+            <select name="Apis" id="id_Apps">
+                <option value="" selected>---api流程测试用例---</option>
+            </select>
+            <a class="related-widget-wrapper-link change-related" id="change_id_Apps" title="更改选中的测试用例" 
+            data-href-template="/admin/apptest/appcase/change/?_to_field=id&amp;_popup=1">
+            <img src="/static/admin/img/icon-changelink.svg" alt="修改"/>   
+            </a>
+            <a class="related-widget-wrapper-link add-related" id="add_id_Apps" title="增加另一个测试用例" 
+            href="/admin/apptest/appcase/add/?_to_field=id&amp;_popup=1" style="padding-right:60px;" >
+            <img src="/static/admin/img/icon-addlink.svg" alt="增加"/> 
+            </a>       
+        </div
         </form>
     </div>
     <span style="position:absolute;right:50%;bottom:30px;">
