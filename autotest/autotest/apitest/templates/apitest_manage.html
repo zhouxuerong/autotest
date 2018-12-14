@@ -9,20 +9,20 @@
     <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <title>自动化测试平台</title>
-<link href="../static/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css" />
-<script type="text/javascript" src="/admin/jsi18n/"></script>
-<script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
-<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
-<script type="text/javascript" src="/static/admin/js/core.js"></script>
-<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
-<script type="text/javascript" src="/static/admin/js/actions.js"></script>
-<script type="text/javascript" src="/static/admin/js/urlify.js"></script>
-<script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
-<script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script>    
-<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">   
-<link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css" />
-<meta name="robots" content="NONE,NOARCHIVE" />
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css" />
+    <script type="text/javascript" src="/admin/jsi18n/"></script>
+    <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+    <script type="text/javascript" src="/static/admin/js/core.js"></script>
+    <script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+    <script type="text/javascript" src="/static/admin/js/actions.js"></script>
+    <script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+    <script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+    <script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css" />
+    <meta name="robots" content="NONE,NOARCHIVE" />
 
 </head>
 
@@ -30,81 +30,45 @@
     <!--导航栏-->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">&nbsp;</a>
-                <ul class="nav justify-content-center">
-                    <a class="nav-link" style="color:white" href="/apitest_manage/">流程接口测试</a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a class="nav-link"  style="color:white" href="/apistep_manage/">流程接口测试步骤</a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a class="nav-link"  style="color:white" href="/apistep_manage/">单一接口测试用例</a>
-                </ul>
-                <ul class="nav justify-content-end">
-                    <li class="nav-link"><a style="color:white" href="../admin">{{user}}</a></li>
-                    <li class="nav-link"><a style="color:white" href="/logout/">退出</a></li>
-                </ul>
-            </div>
+            <li class="active"><a style='color:white' href="/apis_manage/">单一接口</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <li><a style='color:white' href="/apitest_manage/">流程接口</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <li class="active"><a style='color:white' href="/appcase_manage/">app用例</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <li class="active"><a style='color:white' href="/webcase_manage/">web用例</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <ul class="nav justify-content-center">
+            </ul>
+            <ul class="nav justify-content-end  style="position:absolute; right:10px; bottom:0px;">
+                <li class="nav-link"><a style="color:white" href="../admin">{{user}}</a></li>
+                <li class="nav-link"><a style="color:white" href="/logout/">退出</a></li>
+            </ul>
+        </div>
     </nav>
     <!--流程接口-->
-    <div class="page-header" style="padding-top:70px;">
-    <form class="navbar-form" method="get" action="/apisearch">
-    <!-- {% csrf_token %} -->
-    <input type="search" name="apitestname" placeholder="名称" required>
-    <button type="submit">搜索</button>
-    <!-- 增加API流程测试用例 -->
-    <div style="float:right;width:73%;">
-        <select name="Apitest" id="id_Apitest">
-        <option value="" selected>---api流程测试用例---</option>
-        </select>
-        <a class="related-widget-wrapper-link change-related" id="change_id_Apitest" title="更改选中的测试用例" 
-        data-href-template="/admin/apitest/apitest/change/?_to_field=id&amp;_popup=1">
-        <img src="/static/admin/img/icon-changelink.svg" alt="修改"/>   
-        </a>
-        <a class="related-widget-wrapper-link add-related" id="add_id_Apitest" title="增加另一个测试用例" 
-        href="/admin/apitest/apitest/add/" style="padding-right:60px;" >
-        <img src="/static/admin/img/icon-addlink.svg" alt="增加"/> 
-        </a>      
-    </div>
-    </form>
-    </div>
-    <span style="position:absolute;right:50%;bottom:30px;">
-            <div style="position:absolute; right:100px;width:100px;">
-                    <tr>
-                        <th>共</th>
-                        <td>{{apitestcounts}}</td>
-                        <th>条记录</th>
-                    </tr>            
-                </div>
-            <div class="container">
-                <ul class="pagination" id="pager">
-                    {#上一页按钮开始#}
-                    {# 如果当前页有上一页#}
-                    {% if apitests.has_previous %}
-                        {#  当前页的上一页按钮正常使用#}
-                        <li class="previous"><a href="/apitest_manage/?page={{ apis.previous_page_number }}">上一页</a></li>
-                    {% else %}
-                        {# 当前页的不存在上一页时,上一页的按钮不可用#}
-                        <li class="previous disabled"><a href="#">上一页</a></li>
-                    {% endif %}
-                    {#上一页按钮结束#}
-                    {# 页码开始#}
-                    {% for num in apitests.paginator.page_range %}
-                        {% if num == currentPage %}
-                            <li class="item active"><a href="/apitest_manage/?page={{ num }}">{{ num }}</a></li>
-                        {% else %}
-                            <li class="item"><a href="/apitest_manage/?page={{ num }}">{{ num }}</a></li>
-                        {% endif %}
-                    {% endfor %}
-                    {#页码结束#}
-                    {# 下一页按钮开始#}
-                    {% if apisteps.has_next %}
-                        <li class="next"><a href="/apitest_manage/?page={{ apis.next_page_number }}">下一页</a></li>
-                    {% else %}
-                        <li class="next disabled"><a href="#">下一页</a></li>
-                    {% endif %}
-                    {# 下一页按钮结束#}
-                </ul>
+    <div class="page-header" style="padding-top:0px;">
+        <form class="navbar-form" method="get" action="/apisearch">
+            {% csrf_token %}
+            <input type="search" name="apitestname" placeholder="名称" required>
+            <button type="submit">搜索</button>
+            <!-- 增加API流程测试用例 -->
+            <div style="float:right;width:73%;">
+                <select name="Apitest" id="id_Apitest">
+                    <option value="" selected>---api流程测试用例---</option>
+                </select>
+                <a class="related-widget-wrapper-link change-related" id="change_id_Apitest" title="更改选中的测试用例"
+                    data-href-template="/admin/apitest/apitest/change/?_to_field=id&amp;_popup=1">
+                    <img src="/static/admin/img/icon-changelink.svg" alt="修改" />
+                </a>
+                <a class="related-widget-wrapper-link add-related" id="add_id_Apitest" title="增加另一个测试用例" href="/admin/apitest/apitest/add/"
+                    style="padding-right:60px;">
+                    <img src="/static/admin/img/icon-addlink.svg" alt="增加" />
+                </a>
             </div>
-            </span>
+        </form>
+    </div>
+
     <div class="row" style="padding-top:70px;padding-left:30px">
         <div class="col-md-11">
             <table class="table table-striped">
@@ -115,6 +79,8 @@
                         <th>执行人</th>
                         <th>结果</th>
                         <th>编辑</th>
+                        <th>刪除</th>
+                        <th>查看</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -123,15 +89,23 @@
                         <td>{{apitest.id}}</td>
                         <td>{{apitest.apitestname}}</td>
                         <td>{{apitest.apitester}}</td>
-                        <td>    
-                        {% if apitest.apitestresult == 1 %}
+                        <td>
+                            {% if apitest.apitestresult == 1 %}
                             <a style="color:green"> {{apitest.apitestresult}} </a>
-                        {% else %}
+                            {% else %}
                             <a style="color:red">{{apitest.apitestresult}}</a>
-                        {% endif %}       
+                            {% endif %}
                         </td>
                         <td><a style="color:lightblue" class="related-widget-wrapper-link add-related" href="../admin/apitest/apitest/{{apitest.id}}/change/">
-                            <img src="/static/admin/img/icon-changelink.svg"></a>
+                                <img src="/static/admin/img/icon-changelink.svg"></a>
+                        </td>
+                        <td>
+                            <a style="color:lightblue" class="related-widget-wrapper-link add-related" href="../admin/apitest/apitest/{{apitest.id}}/delete/">
+                                <img src="/static/admin/img/icon-deletelink.svg"></a>
+                        </td>
+                        <td>
+                            <a href="{% url 'apistep_manage' %}?apitest.id={{apitest.id}}">
+                                <img src="/static/admin/img/icon-yes.svg"></a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -142,7 +116,45 @@
 
     </div>
 
-
+    <span style="position:absolute;left:600px;bottom:30px;">
+        <div style="position:absolute; right:950px;width:100px;bottom:25px;">
+            <tr>
+                <th>共</th>
+                <td>{{apitestcounts}}</td>
+                <th>条记录</th>
+            </tr>
+        </div>
+        <div class="container">
+            <ul class="pagination" id="pager">
+                {#上一页按钮开始#}
+                {# 如果当前页有上一页#}
+                {% if apitests.has_previous %}
+                {# 当前页的上一页按钮正常使用#}
+                <li class="previous"><a href="/apitest_manage/?page={{ apitests.previous_page_number }}">上一页</a></li>
+                {% else %}
+                {# 当前页的不存在上一页时,上一页的按钮不可用#}
+                <li class="previous disabled"><a href="#">上一页</a></li>
+                {% endif %}
+                {#上一页按钮结束#}
+                {# 页码开始#}
+                {% for num in apitests.paginator.page_range %}
+                {% if num == currentPage %}
+                <li class="item active"><a href="/apitest_manage/?page={{ num }}">{{ num }}</a></li>
+                {% else %}
+                <li class="item"><a href="/apitest_manage/?page={{ num }}">{{ num }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {#页码结束#}
+                {# 下一页按钮开始#}
+                {% if apitests.has_next %}
+                <li class="next"><a href="/apitest_manage/?page={{ apitests.next_page_number }}">下一页</a></li>
+                {% else %}
+                <li class="next disabled"><a href="#">下一页</a></li>
+                {% endif %}
+                {# 下一页按钮结束#}
+            </ul>
+        </div>
+    </span>
 
 
 </body>

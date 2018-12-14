@@ -49,22 +49,10 @@ def apitest_manage(request):
 # @login_required
 def apistep_manage(request):
     username = request.session.get('user','')
+    apitestid =request.GET.get("apitest.id",None)
+    apitest = Apitest.objects.get(id=apitestid)
     apistep_list = Apistep.objects.all()
-    apistep_counts = Apistep.objects.all().count()
-    paginator = Paginator(apistep_list, 10)
-    #从前端获取当前的页码数,默认为1
-    page = request.GET.get('page',1)   
-    #把当前的页码数转换成整数类型
-    currentPage=int(page)
-    try:
-        print(page)
-        apistep_list = paginator.page(page)#获取当前页码的记录
-    except PageNotAnInteger:
-        apistep_list = paginator.page(1)#如果用户输入的页码不是整数时,显示第1页的内容
-    except EmptyPage:
-        apistep_list = paginator.page(paginator.num_pages)#如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
- 
-    return render(request,"apistep_manage.html",{"user":username,"apisteps":apistep_list,"apistepcounts":apistep_counts})
+    return render(request,"apistep_manage.html",{"user":username,"apisteps":apistep_list,"apitest":apitest})
 
 def apis_manage(request):
     username = request.session.get("user","")

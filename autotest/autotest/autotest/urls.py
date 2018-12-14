@@ -32,7 +32,7 @@ urlpatterns = [
     path('welcome',views.welcome),
     path('product_manage/',proviews.product_manage),
     path('productsearch/',proviews.productsearch),
-    path('apistep_manage/',views.apistep_manage),
+    path('apistep_manage/',views.apistep_manage,name="apistep_manage"),
     path('apis_manage/',views.apis_manage),
     path('apisearch/',views.apisearch),
     path('apissearch/',views.apissearch),
