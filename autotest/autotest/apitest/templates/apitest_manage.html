@@ -40,20 +40,20 @@
             &nbsp;&nbsp;&nbsp;&nbsp;
             <ul class="nav justify-content-center">
             </ul>
-            <ul class="nav justify-content-end  style="position:absolute; right:10px; bottom:0px;">
-                <li class="nav-link"><a style="color:white" href="../admin">{{user}}</a></li>
+            <ul class="nav justify-content-end"  style="position:absolute; right:10px; bottom:0px;">
+                <li class="nav-link"><a style="color:white" href="#">{{user}}</a></li>
                 <li class="nav-link"><a style="color:white" href="/logout/">退出</a></li>
             </ul>
         </div>
     </nav>
     <!--流程接口-->
     <div class="page-header" style="padding-top:0px;">
-        <form class="navbar-form" method="get" action="/apisearch">
+        <form class="navbar-form" method="get" action="/apisearch/">
             {% csrf_token %}
             <input type="search" name="apitestname" placeholder="名称" required>
             <button type="submit">搜索</button>
             <!-- 增加API流程测试用例 -->
-            <div style="float:right;width:73%;">
+            <div style="float:right;width:65%;">
                 <select name="Apitest" id="id_Apitest">
                     <option value="" selected>---api流程测试用例---</option>
                 </select>
@@ -63,13 +63,13 @@
                 </a>
                 <a class="related-widget-wrapper-link add-related" id="add_id_Apitest" title="增加另一个测试用例" href="/admin/apitest/apitest/add/"
                     style="padding-right:60px;">
-                    <img src="/static/admin/img/icon-addlink.svg" alt="增加" />
+                    <img src="/static/admin/img/icon-addlink.svg" alt="增加"/>增加
                 </a>
             </div>
         </form>
     </div>
 
-    <div class="row" style="padding-top:70px;padding-left:30px">
+    <div class="row" style="padding-top:70px;padding-left:30px;">
         <div class="col-md-11">
             <table class="table table-striped">
                 <thead>
@@ -111,19 +111,17 @@
                     {% endfor %}
                 </tbody>
             </table>
-
         </div>
-
     </div>
 
-    <span style="position:absolute;left:600px;bottom:30px;">
-        <div style="position:absolute; right:950px;width:100px;bottom:25px;">
+    <span style="position:absolute;left:400px;bottom:30px;">
+        <div style="position:absolute;right:950px;width:100px;bottom:30px;">
             <tr>
                 <th>共</th>
                 <td>{{apitestcounts}}</td>
                 <th>条记录</th>
             </tr>
-        </div>
+        </div>   
         <div class="container">
             <ul class="pagination" id="pager">
                 {#上一页按钮开始#}
@@ -154,9 +152,7 @@
                 {# 下一页按钮结束#}
             </ul>
         </div>
-    </span>
-
-
+    </span> 
 </body>
 
 </html>

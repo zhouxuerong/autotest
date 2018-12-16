@@ -249,12 +249,6 @@ if __name__ == '__main__':
     testunit.addTest(ApiFlow("test_readSQLcase"))
     filename =os.path.split(os.path.realpath(__file__))[0] + "/templates/apitest_report.html"
     fp = open(filename,"wb")
-<<<<<<< HEAD
-    runner = HTMLTestRunner.HTMLTestRunner(stream=fp,title="流程接口测试报告",description=u"流程场景接口")
-=======
-    runner  = HTMLTestRunner.HTMLTestRunner(stream=fp,title=u"自动化测试汇总报告",description=u"app自动化测试")
->>>>>>> 2d38142bfc178227a96b220cd948ac445bb3b63a
-    runner.run(testunit)
 
 
         
